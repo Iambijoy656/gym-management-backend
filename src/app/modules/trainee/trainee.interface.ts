@@ -7,7 +7,7 @@ export type UserName = {
 };
 
 export type ITrainee = {
-    // id: string;
+    id: string;
     name: UserName;
     profileImage: string;
     dateOfBirth?: string;
