@@ -10,6 +10,7 @@ import { ITrainee } from '../trainee/trainee.interface';
 import { Trainee } from '../trainee/trainee.model';
 import { IUser } from './user.interface';
 import { User } from './user.model';
+import { generateAdminId, generateTraineeId, generateTrainerId } from './user.utils';
 
 
 
@@ -31,10 +32,10 @@ const createTrainee = async (
     try {
         session.startTransaction();
         // generate trainee id
-        // const id = await generateTraineeId();
-        // set custom id into both  trainee & user
-        // user.id = id;
-        // trainee.id = id;
+        const id = await generateTraineeId();
+
+        user.id = id;
+        trainee.id = id;
 
         // Create trainee using sesssin
         const newTrainee = await Trainee.create([trainee], { session });
@@ -62,9 +63,9 @@ const createTrainee = async (
     }
 
     if (newUserAllData) {
-        newUserAllData = await User.findOne({ _id: newUserAllData._id })
+        newUserAllData = await User.findOne({ id: newUserAllData.id })
     }
-    console.log('newUserAllData', newUserAllData);
+
     return newUserAllData;
 };
 
@@ -85,10 +86,10 @@ const createTrainer = async (
     try {
         session.startTransaction();
         // generate trainer id
-        // const id = await generateTrainerId();
-        // // set custom id into both  trainer & user
-        // user.id = id;
-        // trainer.id = id;
+        const id = await generateTrainerId();
+        // set custom id into both  trainer & user
+        user.id = id;
+        trainer.id = id;
         // Create trainer using sesssin
         const newTrainer = await Trainer.create([trainer], { session });
 
@@ -114,17 +115,7 @@ const createTrainer = async (
     }
 
     if (newUserAllData) {
-        newUserAllData = await User.findOne({ id: newUserAllData.id }).populate({
-            path: 'trainer',
-            populate: [
-                {
-                    path: 'academicDepartment',
-                },
-                {
-                    path: 'academicTrainer',
-                },
-            ],
-        });
+        newUserAllData = await User.findOne({ id: newUserAllData.id })
     }
 
     return newUserAllData;
@@ -146,9 +137,9 @@ const createAdmin = async (
     try {
         session.startTransaction();
         // generate admin id
-        // const id = await generateAdminId();
-        // user.id = id;
-        // admin.id = id;
+        const id = await generateAdminId();
+        user.id = id;
+        admin.id = id;
 
         const newAdmin = await Admin.create([admin], { session });
 
@@ -174,14 +165,7 @@ const createAdmin = async (
     }
 
     if (newUserAllData) {
-        newUserAllData = await User.findOne({ id: newUserAllData.id }).populate({
-            path: 'admin',
-            populate: [
-                {
-                    path: 'managementDepartment',
-                },
-            ],
-        });
+        newUserAllData = await User.findOne({ id: newUserAllData.id })
     }
 
     return newUserAllData;

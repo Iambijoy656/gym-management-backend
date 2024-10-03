@@ -43,7 +43,7 @@ const TrainerSchema = new Schema<ITrainer, TrainerModel>(
         },
         contactNo: {
             type: String,
-            unique: true,
+
 
         },
         emergencyContactNo: {

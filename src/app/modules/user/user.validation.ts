@@ -101,7 +101,7 @@ const createAdminZodSchema = z.object({
 
             gender: z.string({
                 required_error: 'Gender is required',
-            }),
+            }).optional(),
 
             bloodGroup: z.string({
                 required_error: 'Blood group is required',
@@ -124,9 +124,7 @@ const createAdminZodSchema = z.object({
             presentAddress: z.string({
                 required_error: 'Present address is required',
             }).optional(),
-            managementDepartment: z.string({
-                required_error: 'Management department is required',
-            }),
+
             designation: z.string({
                 required_error: 'Designation is required',
             }).optional(),

@@ -43,7 +43,6 @@ const TraineeSchema = new Schema<ITrainee, TraineeModel>(
         },
         contactNo: {
             type: String,
-            unique: true,
 
         },
         emergencyContactNo: {

@@ -38,29 +38,28 @@ const AdminSchema = new Schema<IAdmin, AdminModel>(
         },
         email: {
             type: String,
-            unique: true,
-            required: true,
+            unique: true
+
         },
         contactNo: {
             type: String,
-            unique: true,
-            required: true,
+
         },
         emergencyContactNo: {
             type: String,
-            required: true,
+
         },
         presentAddress: {
             type: String,
-            required: true,
+
         },
         permanentAddress: {
             type: String,
-            required: true,
+
         },
         designation: {
             type: String,
-            required: true,
+
         },
         profileImage: {
             type: String,
